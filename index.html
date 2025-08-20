@@ -1,370 +1,689 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Deva</title>
-  <link rel="icon" href="assets/about_img.jpg" type="image/png" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devanandan - Flutter Developer</title>
+  <link rel="icon" href="assets/about_img.jpg" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
   <script src="https://kit.fontawesome.com/9ca00d9c1c.js" crossorigin="anonymous"></script>
+  <style>
+    /* Custom styles that can't be done with Tailwind */
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-60px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(60px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 25px rgba(0, 255, 153, 0.4); }
+      50% { box-shadow: 0 0 50px rgba(0, 255, 153, 0.9); }
+      100% { box-shadow: 0 0 25px rgba(0, 255, 153, 0.4); }
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, #00ff99, #0066ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .gradient-btn {
+      background: linear-gradient(90deg, #00ff99, #0066ff);
+      color: #000;
+      transition: all 0.3s ease;
+    }
+    
+    .gradient-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 255, 153, 0.3);
+    }
+    
+    .custom-bg {
+      background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    }
+    
+    .profile-wrapper {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      padding: 8px;
+      background: radial-gradient(circle, rgba(0,255,153,0.6) 0%, transparent 70%);
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+    
+    .profile-wrapper img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid #121212;
+      box-shadow: 0 0 40px rgba(0, 255, 153, 0.4);
+    }
+    
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .project-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 300px;
+      transition: transform 0.3s ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .project-image {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .project-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      color: white;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .project-card:hover .project-overlay {
+      transform: translateY(0);
+    }
+    
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+    
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .btn-nav.active {
+      background: #00ff99;
+      color: #000;
+    }
+    
+    .edu-card, .skill-card {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .edu-card.show, .skill-card.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.6s ease;
+    }
+    
+    @media (max-width: 768px) {
+      .profile-wrapper {
+        width: 240px;
+        height: 240px;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="font-['Poppins'] bg-gray-900 text-white">
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 bg-gray-900 z-50 shadow-lg">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        <a href="#" class="text-2xl font-bold text-white">Adhithyan</a>
+        <button class="md:hidden text-white focus:outline-none" id="menu-toggle">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+        <div class="hidden md:flex space-x-8">
+          <a href="#" class="text-white hover:text-green-400 transition">Home</a>
+          <a href="#services" class="text-white hover:text-green-400 transition">Services</a>
+          <a href="#skills" class="text-white hover:text-green-400 transition">Skills</a>
+          <a href="#projects" class="text-white hover:text-green-400 transition">Projects</a>
+          <a href="#contact" class="text-white hover:text-green-400 transition">Contact</a>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div class="md:hidden hidden mt-4" id="mobile-menu">
+        <div class="flex flex-col space-y-3">
+          <a href="#" class="text-white hover:text-green-400 transition">Home</a>
+          <a href="#services" class="text-white hover:text-green-400 transition">Services</a>
+          <a href="#skills" class="text-white hover:text-green-400 transition">Skills</a>
+          <a href="#projects" class="text-white hover:text-green-400 transition">Projects</a>
+          <a href="#contact" class="text-white hover:text-green-400 transition">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center px-6 py-20 custom-bg">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+      <!-- Left Side -->
+      <div class="flex-1 text-center md:text-left animate-fadeInLeft">
+        <h5 class="text-lg text-green-400 mb-3 tracking-wider">FLUTTER DEVELOPER</h5>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Hello I'm <span class="gradient-text">Devanandan</span></h1>
+        <p class="text-gray-300 text-lg mb-8 max-w-lg">
+          I build beautiful apps using Flutter. Clean code, smooth UX, and modern design are what I aim for in every project.
+        </p>
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-6">
+          <a href="assets/Devanandan_pr (2).pdf" download class="bg-green-400 hover:bg-green-500 text-black font-semibold px-8 py-3 rounded-lg transition-all duration-300 shadow-lg shadow-green-400/30 hover:shadow-green-400/50">
+            Download CV <i class="fas fa-download ml-2"></i>
+          </a>
+          <div class="flex space-x-4">
+            <a href="https://www.linkedin.com/in/adhithyan-p-b-856190330/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/Adhithyan69" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/_adhitxyn_/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Side -->
+      <div class="flex-1 flex justify-center animate-fadeInRight">
+        <div class="profile-wrapper">
+          <img src="assets/image.png" alt="Profile" class="w-full h-full">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume Section -->
+  <section class="py-20 px-6">
+    <div class="container mx-auto">
+      <div class="flex flex-col lg:flex-row gap-12">
+        <!-- Left Navigation -->
+        <div class="lg:w-1/4 lg:sticky lg:top-28 self-start">
+          <h2 class="text-3xl font-bold mb-3">Why hire me?</h2>
+          <p class="text-gray-400 mb-8">
+            I bring a combination of technical expertise, creative problem-solving, and dedication to every project I work on.
+          </p>
+          <div class="flex flex-col space-y-3">
+            <button class="btn-nav active text-left px-4 py-3 rounded-lg bg-gray-800 hover:bg-green-400 hover:text-black transition-all" data-tab="experience">Experience</button>
+            <button class="btn-nav text-left px-4 py-3 rounded-lg bg-gray-800 hover:bg-green-400 hover:text-black transition-all" data-tab="education">Education</button>
+            <button class="btn-nav text-left px-4 py-3 rounded-lg bg-gray-800 hover:bg-green-400 hover:text-black transition-all" data-tab="skills">Skills</button>
+            <button class="btn-nav text-left px-4 py-3 rounded-lg bg-gray-800 hover:bg-green-400 hover:text-black transition-all" data-tab="about">About me</button>
+          </div>
+        </div>
+        
+        <!-- Right Content -->
+        <div class="lg:w-3/4">
+          <!-- Experience Tab -->
+          <div id="experience" class="tab-content active">
+            <h3 class="text-2xl font-bold mb-6"><span class="bg-blue-600 text-white px-3 py-1 rounded-lg">My experience</span></h3>
+            <p class="text-gray-400 mb-8">
+              I've worked with various companies and clients to deliver high-quality mobile applications.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="edu-card bg-gray-800 p-6 rounded-xl hover:shadow-lg hover:shadow-green-400/20 transition-all">
+                <h4 class="text-green-400 text-lg font-semibold mb-2">2024 - 2025</h4>
+                <p class="text-white font-medium mb-1"> Flutter Developer</p>
+                <small class="text-gray-400">Tech Company</small>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Education Tab -->
+        <div id="education" class="tab-content">
+  <h3 class="text-2xl font-bold mb-6">
+    <span class="bg-blue-600 text-white px-3 py-1 rounded-lg">My Education</span>
+  </h3>
+  <p class="text-gray-400 mb-8">
+    My educational background and continuous learning journey in technology.
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    
+    <!-- +2 -->
+    <div class="edu-card bg-gray-800 p-6 rounded-xl hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <h4 class="text-green-400 text-lg font-semibold mb-2">Completed</h4>
+      <p class="text-white font-medium mb-1">Higher Secondary (+2)</p>
+      <small class="text-gray-400">School Education</small>
+    </div>
+    
+    <!-- Flutter Course -->
+    <div class="edu-card bg-gray-800 p-6 rounded-xl hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <h4 class="text-green-400 text-lg font-semibold mb-2">2024</h4>
+      <p class="text-white font-medium mb-1">Flutter Development Course</p>
+      <small class="text-gray-400">Online Training</small>
+    </div>
+    
+    <!-- Figma Skill -->
+    <div class="edu-card bg-gray-800 p-6 rounded-xl hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <h4 class="text-green-400 text-lg font-semibold mb-2">2024</h4>
+      <p class="text-white font-medium mb-1">UI/UX Design (Figma)</p>
+      <small class="text-gray-400">Online Skill Program</small>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Skills Tab -->
+<div id="skills" class="tab-content">
+  <h3 class="text-2xl font-bold mb-6">
+    <span class="bg-blue-600 text-white px-3 py-1 rounded-lg">My Skills</span>
+  </h3>
+  <p class="text-gray-400 mb-8">Technologies I work with:</p>
+  
+  <!-- Grid adjusted for even alignment -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-6">
+    
+    <!-- Flutter -->
+    <div class="skill-card bg-gray-800 p-6 rounded-xl flex flex-col items-center text-center hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter" class="w-12 h-12 mb-3">
+      <p class="font-medium">Flutter</p>
+    </div>
+
+    <!-- HTML5 -->
+    <div class="skill-card bg-gray-800 p-6 rounded-xl flex flex-col items-center text-center hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="w-12 h-12 mb-3">
+      <p class="font-medium">HTML5</p>
+    </div>
+
+    <!-- CSS3 -->
+    <div class="skill-card bg-gray-800 p-6 rounded-xl flex flex-col items-center text-center hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="w-12 h-12 mb-3">
+      <p class="font-medium">CSS3</p>
+    </div>
+
+    <!-- JavaScript -->
+    <div class="skill-card bg-gray-800 p-6 rounded-xl flex flex-col items-center text-center hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-12 h-12 mb-3">
+      <p class="font-medium">JavaScript</p>
+    </div>
+
+    <!-- Git -->
+    <div class="skill-card bg-gray-800 p-6 rounded-xl flex flex-col items-center text-center hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-12 h-12 mb-3">
+      <p class="font-medium">Git</p>
+    </div>
+
+    <!-- VS Code -->
+    <div class="skill-card bg-gray-800 p-6 rounded-xl flex flex-col items-center text-center hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" class="w-12 h-12 mb-3">
+      <p class="font-medium">VS Code</p>
+    </div>
+
+    <!-- Android Studio -->
+    <div class="skill-card bg-gray-800 p-6 rounded-xl flex flex-col items-center text-center hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" alt="Android Studio" class="w-12 h-12 mb-3">
+      <p class="font-medium">Android Studio</p>
+    </div>
+
+    <!-- Figma -->
+    <div class="skill-card bg-gray-800 p-6 rounded-xl flex flex-col items-center text-center hover:shadow-lg hover:shadow-green-400/20 transition-all">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" class="w-12 h-12 mb-3">
+      <p class="font-medium">Figma</p>
+    </div>
+
+  </div>
+</div>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <div class="container">
-    <a class="navbar-brand logo" href="#">Adhithyan</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
+          <!-- About Tab -->
+          <div id="about" class="tab-content">
+            <h3 class="text-2xl font-bold mb-6"><span class="bg-blue-600 text-white px-3 py-1 rounded-lg">About me</span></h3>
+            <p class="text-gray-400 mb-8">
+              Get to know more about me and my professional background.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p><strong class="text-white">Name:</strong> <span class="text-gray-400">Devanandan</span></p>
+              <p><strong class="text-white">Experience:</strong> <span class="text-gray-400">1+ Years</span></p>
+              <p><strong class="text-white">Nationality:</strong> <span class="text-gray-400">Indian</span></p>
+              <p><strong class="text-white">Freelance:</strong> <span class="text-gray-400">Available</span></p>
+              <p><strong class="text-white">Phone:</strong> <span class="text-gray-400">+91 8590758272</span></p>
+              <p><strong class="text-white">Email:</strong> <span class="text-gray-400">devanandanpr001@gmail.com</span></p>
+              <p><strong class="text-white">Languages:</strong> <span class="text-gray-400">English, Malayalam, Tamil</span></p>
+              <p><strong class="text-white">Location:</strong> <span class="text-gray-400">Palakkad, Kerala</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-20 px-6 bg-gray-800">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-4">Services</h2>
+      <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+        Your idea, my code — let's build something great together.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-gray-900 p-8 rounded-xl hover:shadow-lg hover:shadow-green-400/10 transition-all">
+          <div class="w-20 h-20 bg-green-400/10 rounded-lg flex items-center justify-center mb-6">
+            <i class="fas fa-mobile-alt text-green-400 text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">App Development</h3>
+          <p class="text-gray-400">
+            Building beautiful, performant mobile applications using Flutter for both iOS and Android platforms.
+          </p>
+        </div>
+        <div class="bg-gray-900 p-8 rounded-xl hover:shadow-lg hover:shadow-green-400/10 transition-all">
+          <div class="w-20 h-20 bg-green-400/10 rounded-lg flex items-center justify-center mb-6">
+            <i class="fas fa-film text-green-400 text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Video Editing</h3>
+          <p class="text-gray-400">
+            Professional video editing services using CapCut and other tools to create engaging content.
+          </p>
+        </div>
+        <div class="bg-gray-900 p-8 rounded-xl hover:shadow-lg hover:shadow-green-400/10 transition-all">
+          <div class="w-20 h-20 bg-green-400/10 rounded-lg flex items-center justify-center mb-6">
+            <i class="fas fa-code text-green-400 text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Web Development</h3>
+          <p class="text-gray-400">
+            Creating responsive, modern websites with clean code and excellent user experience.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Projects Section -->
+<section id="projects" class="py-20 px-6">
+  <div class="container mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-4">My Projects</h2>
+    <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+      Here are some of my recent projects that showcase my skills and expertise.
+    </p>
+    
+    <div class="project-grid">
+      <!-- Book My OP -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="assets/image copy 6.png" alt="Book My OP: Hospital OP Booking App">
+        </div>
+        <div class="project-overlay">
+          <h3 class="text-xl font-bold mb-2">Book My OP</h3>
+          <p class="text-gray-300">
+            A hospital OP booking app that simplifies patient appointments and improves hospital workflow efficiency.
+          </p>
+        </div>
+      </div>
+      
+      <!-- ChatHub -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="assets/image copy 5.png" alt="ChatHub: Messaging App">
+        </div>
+        <div class="project-overlay">
+          <h3 class="text-xl font-bold mb-2">ChatHub</h3>
+          <p class="text-gray-300">
+            A real-time messaging app with smooth UI and secure chat features for seamless communication.
+          </p>
+        </div>
+      </div>
+      
+      <!-- E-Commerce App -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="assets/image copy 2.png" alt="E-Commerce App">
+        </div>
+        <div class="project-overlay">
+          <h3 class="text-xl font-bold mb-2">E-Commerce App</h3>
+          <p class="text-gray-300">
+            A modern e-commerce mobile app featuring product browsing, cart management, and secure checkout.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
-</nav>
-<section class="hero">
-  <div class="container">
-    <div class="row align-items-center">
+</section>
+
+
+  <!-- Mini Projects Section -->
+  <section class="py-20 px-6 bg-gray-800">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-4">Mini Projects</h2>
+      <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+        Smaller projects that demonstrate my versatility and continuous learning.
+      </p>
       
-      <!-- Left Side: Text -->
-      <div class="col-lg-6 text-center text-lg-start order-2 order-lg-1">
-        <div class="hero-text">
-          <h5 class="subtitle">Flutter Developer</h5>
-          <h1 class="title">Hello I’m <span class="highlight">Devanandan</span></h1>
-          <p class="description">
-            I build beautiful apps using Flutter. Clean code, smooth UX, and modern design are what I aim for in every project.
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-image">
+            <img src="assets/image copy 4.png" alt="News App">
+          </div>
+          <div class="project-overlay">
+            <h3 class="text-xl font-bold mb-2">News App</h3>
+            <p class="text-gray-300">
+              A Flutter app that fetches real-time news using the News API and allows users to bookmark articles.
+            </p>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-image">
+            <img src="assets/image copy.png" alt="Notes App">
+          </div>
+          <div class="project-overlay">
+            <h3 class="text-xl font-bold mb-2">Notes App</h3>
+            <p class="text-gray-300">
+              Minimal notes application with local storage and responsive layout.
+            </p>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-image">
+            <img src="assets/image copy 4.png" alt="Book Search App">
+          </div>
+          <div class="project-overlay">
+            <h3 class="text-xl font-bold mb-2">Book Search App</h3>
+            <p class="text-gray-300">
+              A Flutter application that allows users to search for books using the Google Books API.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6 custom-bg">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-4">Get In <span class="gradient-text">Touch</span></h2>
+      <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+        Feel free to reach out for collaborations or just a friendly hello!
+      </p>
+      
+      <div class="flex flex-col lg:flex-row gap-12">
+        <div class="lg:w-5/12">
+          <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+          <p class="text-gray-400 mb-8">
+            Feel free to reach out to me for any questions or opportunities. I'm always open to discussing new projects.
           </p>
           
-          <div class="cta-buttons">
-            <a href="assets/cv.pdf" download class="btn download-btn">
-              Download CV <i class="fas fa-download"></i>
-            </a>
-            <div class="social-icons">
-              <a href="https://www.linkedin.com/in/adhithyan-p-b-856190330/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-              <a href="https://github.com/Adhithyan69" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-              <a href="https://www.instagram.com/_adhitxyn_/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-green-400/10 rounded-full flex items-center justify-center mr-4 mt-1">
+                <i class="fas fa-map-marker-alt text-green-400"></i>
+              </div>
+              <div>
+                <h4 class="font-bold">Location</h4>
+                <p class="text-gray-400">Palakkad, Kerala</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-green-400/10 rounded-full flex items-center justify-center mr-4 mt-1">
+                <i class="fas fa-envelope text-green-400"></i>
+              </div>
+              <div>
+                <h4 class="font-bold">Email</h4>
+                <p class="text-gray-400">aadhiadhithyan001@gmail.com</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="w-10 h-10 bg-green-400/10 rounded-full flex items-center justify-center mr-4 mt-1">
+                <i class="fas fa-phone text-green-400"></i>
+              </div>
+              <div>
+                <h4 class="font-bold">Phone</h4>
+                <p class="text-gray-400">+91 7902262171</p>
+              </div>
+            </div>
+            
+            <div class="mt-8">
+              <h4 class="text-xl font-bold mb-4">Follow Me</h4>
+              <div class="flex space-x-4">
+                <a href="https://www.linkedin.com/in/adhithyan-p-b-856190330/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/Adhithyan69" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.instagram.com/_adhitxyn_/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Right Side: Image -->
-      <div class="col-lg-6 text-center order-1 order-lg-2">
-        <div class="hero-image">
-          <img src="assets/adhi1_png.png" alt="Profile" />
-        </div>
-      </div>
-
-
-</section>
-
-<section id="about" class="py-5 bg-light">
-  <div class="container">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-5">
-      <img src="assets/image.png" alt="Devanandan" class="img-fluid shadow about-img" />
-      </div>
-      <div class="col-lg-7">
-        <h2 class="mb-3">About Me</h2>
-        <p>
-          I’m a motivated Flutter Developer with a passion for crafting responsive, high-performance mobile applications. With a background in software development and hands-on experience using Flutter and Dart, I specialize in building seamless cross-platform experiences that prioritize both performance and design.
-        </p>
-        <p>
-          I'm skilled in integrating APIs, managing app state efficiently, and collaborating within agile teams to bring ideas to life. I’m always excited to take on new challenges, solve real-world problems, and contribute to innovative, user-focused projects.
-        </p>
-        <div class="mt-4">
-          <a href="assets/cv.pdf" download class="btn btn-primary me-2 ">Download CV</a>
-          <a href="#contact" class="btn btn-outline-primary">Contact Me</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="services" class="py-5">
-  <div class="container text-center">
-    <h2 class="mb-3">Services</h2>
-    <p class="mb-5 text-muted">Your idea, my code — let’s build something great together.</p>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm h-100 service-card">
-          <div class="card-body">
-            <img src="https://img.icons8.com/?size=80&id=szOBoOVU3fvT&format=png" class="mb-3" alt="App Development"/>
-            <h5 class="card-title">App Developing</h5>
-            <div class="service-underline mx-auto mt-2" style="width: 50px; height: 3px;;"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm h-100 service-card">
-          <div class="card-body">
-            <img src="assets/capcut.png" class="mb-3 mx-auto d-block" style="height: 100px;" alt="Video Editing" />
-            <h5 class="card-title">Video Editing</h5>
-            <div class="service-underline mx-auto mt-2" style="width: 50px; height: 3px; ;"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm h-100 service-card">
-          <div class="card-body">
-            <img src="https://img.icons8.com/?size=60&id=1FdYDpqhZ86g&format=png" style="height: 100px;" class="mb-3" alt="Web Development"/>
-            <h5 class="card-title">Web Development</h5>
-            <div class="service-underline mx-auto mt-2" style="width: 50px; height: 3px; ;"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills" class="py-5 bg-light skills-section">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="text-white">My Skills</h2>
-      <p>Crafting efficient solutions through clean code and thoughtful design.</p>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-6">
-        <div class="mb-2">Flutter <span class="float-end">95%</span></div>
-        <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
-      </div>
-      <div class="col-md-6">
-        <div class="mb-2">Dart <span class="float-end">90%</span></div>
-        <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
-      </div>
-      <div class="col-md-6">
-        <div class="mb-2">Video Editing <span class="float-end">75%</span></div>
-        <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
-      </div>
-      <div class="col-md-6">
-        <div class="mb-2">HTML/CSS <span class="float-end">45%</span></div>
-        <div class="skill-bar"><div class="skill-fill" style="width: 45%"></div></div>
-      </div>
-      <div class="col-md-6">
-        <div class="mb-2">JavaScript <span class="float-end">45%</span></div>
-        <div class="skill-bar"><div class="skill-fill" style="width: 45%"></div></div>
-      </div>
-      <div class="col-md-6">
-        <div class="mb-2">Git <span class="float-end">85%</span></div>
-        <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects" class="projects">
-  <h2>My Projects</h2>
-  <div class="project-grid">
-    <div class="project-card">
-      <div class="project-image">
-        <img src="assets/fixit_project.png" alt="Fixit: Service App" />
-      </div>
-      <div class="project-overlay">
-        <h3>Fixit: Service App</h3>
-        <p>Developed Fixit, a user-friendly service app designed to connect users with service providers seam
-lessly.</p>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-image">
-        <img src="assets/soften_project.png" alt="Enquiry App for Soften Technologies" />
-      </div>
-      <div class="project-overlay">
-        <h3>Enquiry App for Soften Technologies</h3>
-        <p>Developed an inquiry app for Soften Technologies with an intuitive platform for managing inquiries.</p>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-image">
-        <img src="assets/attendance_ui.png" alt="Flutter App UI" />
-      </div>
-      <div class="project-overlay">
-        <h3>Attendance App UI</h3>
-        <p>Clean Flutter-based mobile UI designs for learning apps.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section id="projects" class="projects">
-  <h2>Mini Projects</h2>
-  <div class="project-grid">
-    <div class="project-card">
-      <div class="project-image">
-        <img src="assets/news_app.png" alt="Fixit: Service App" />
-      </div>
-      <div class="project-overlay">
-        <h3>News App</h3>
-        <p>A Flutter app that fetches real-time news using the News API and allows users to bookmark articles for later reading.</p>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-image">
-        <img src="assets/note_app.png" alt="Enquiry App for Soften Technologies" />
-      </div>
-      <div class="project-overlay">
-        <h3>Notes App</h3>
-        <p>Minimal notes application with local storage and responsive layout.</p>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-image">
-        <img src="assets/book_search_app.jpg" alt="Flutter App UI" />
-      </div>
-      <div class="project-overlay">
-        <h3>Book Search App</h3>
-        <p>A Flutter application that allows users to search for books using the Google Books API. It features a clean UI, real-time search, and displays essential book details such as title, author, thumbnail, and publication year.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-5 bg-dark text-center">
-  <div class="container">
-    <h2 class="text-white mb-5">
-      Tools & Technologies
-    </h2>
-    <div class="row justify-content-center g-4">
-      <div class="col-6 col-sm-4 col-md-2">
-        <div class="card tool-card h-100">
-          <div class="card-body p-3">
-            <img src="https://img.icons8.com/?size=80&id=IYQQHplg11Ie&format=png" alt="Flutter" class="mb-2">
-            <span class="d-block">Flutter</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-sm-4 col-md-2">
-        <div class="card tool-card h-100">
-          <div class="card-body p-3">
-            <img src="https://img.icons8.com/color/48/html-5--v1.png" alt="HTML5" class="mb-2">
-            <span class="d-block">HTML5</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-sm-4 col-md-2">
-        <div class="card tool-card h-100">
-          <div class="card-body p-3">
-            <img src="https://img.icons8.com/color/48/css3.png" alt="CSS3" class="mb-2">
-            <span class="d-block">CSS3</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-sm-4 col-md-2">
-        <div class="card tool-card h-100">
-          <div class="card-body p-3">
-            <img src="https://img.icons8.com/color/48/javascript--v1.png" alt="JavaScript" class="mb-2">
-            <span class="d-block">JavaScript</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-sm-4 col-md-2">
-        <div class="card tool-card h-100">
-          <div class="card-body p-3">
-            <img src="https://img.icons8.com/color/48/git.png" alt="Git" class="mb-2">
-            <span class="d-block">Git</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-sm-4 col-md-2">
-        <div class="card tool-card h-100">
-          <div class="card-body p-3">
-            <img src="https://img.icons8.com/?size=48&id=9OGIyU8hrxW5&format=png" alt="VS Code" class="mb-2">
-            <span class="d-block">VS Code</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section id="contact" class="py-5  text-light custom-bg">
-  <div class="container">
-    <h2 class="text-center mb-5">
-      Get In <span class="gradient-text">Touch</span> 
-    </h2>
-    <div class="row g-5">
-      <div class="col-md-5">
-        <h3 class="text-white">Contact Information</h3>
-        <p class="text-muted">
-          Feel free to reach out to me for any questions or opportunities. I'm always open to discussing new projects.
-        </p>
-        <div class="d-flex align-items-center mb-3">
-          <i class="fas fa-map-marker-alt text-primary me-2"></i>
-          <span class="text-muted">Palakkad, Kerala</span>
-        </div>
-        <div class="d-flex align-items-center mb-3">
-          <i class="fas fa-envelope text-primary me-2"></i>
-          <span class="text-muted">aadhiadhithyan001@gmail.com</span>
-        </div>
-        <div class="d-flex align-items-center mb-3">
-          <i class="fas fa-phone text-primary me-2"></i>
-          <span class="text-muted">+91 7902262171</span>
-        </div>
-        <h4 class="text-white mt-4">Follow Me</h4>
-    <div class="social-icons mb-3">
-            <a href="https://www.linkedin.com/in/adhithyan-p-b-856190330/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/Adhithyan69" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/_adhitxyn_/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-          </div>
-      </div>
-      <div class="col-md-7">
-        <form name="submit-to-google-sheet">
-          <div class="row mb-3">
-            <div class="col">
-              <input type="text" name="Name" class="form-control bg-dark border-0" placeholder="Your Name" required />
+        
+        <div class="lg:w-7/12">
+          <form name="submit-to-google-sheet" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <input type="text" name="Name" placeholder="Your Name" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400" required>
+              </div>
+              <div>
+                <input type="email" name="Email" placeholder="Your Email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400" required>
+              </div>
             </div>
-            <div class="col">
-              <input type="email" name="Email" class="form-control bg-dark border-0" placeholder="Your Email" required />
+            <div>
+              <input type="text" name="Subject" placeholder="Subject" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400" required>
             </div>
-          </div>
-          <div class="mb-3">
-            <input type="text" name="Subject" class="form-control bg-dark border-0" placeholder="Subject" required />
-          </div>
-          <div class="mb-3">
-            <textarea name="Message" class="form-control bg-dark border-0" placeholder="Message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-lg w-100 gradient-btn">
-            Send Message <span>✈</span>
-          </button>
-        </form>
+            <div>
+              <textarea name="Message" placeholder="Message" rows="5" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400" required></textarea>
+            </div>
+            <button type="submit" class="gradient-btn font-semibold px-8 py-4 rounded-lg w-full">
+              Send Message <i class="fas fa-paper-plane ml-2"></i>
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="bg-dark text-white text-center py-3">
-  <p class="mb-0">© 2025 Adhithyan. All rights reserved.</p>
-</footer>
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-8 text-center">
+    <div class="container mx-auto px-6">
+      <p class="text-gray-400">&copy; 2025 Adhithyan. All rights reserved.</p>
+    </div>
+  </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwCrynEq52_uWYn4d6HAPtGwc5QTBAXnNod2YBV3RSCpfk58YBFM_zD4UiHQYudacP5/exec';
-  const form = document.forms['submit-to-google-sheet'];
-  form?.addEventListener('submit', e => {
-    e.preventDefault();
-    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-      .then(response => {
-        alert("Message sent successfully!");
-        form.reset();
-      })
-      .catch(error => {
-        alert("Error!", error.message);
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Tab Switching
+    const buttons = document.querySelectorAll(".btn-nav");
+    const contents = document.querySelectorAll(".tab-content");
+    
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        contents.forEach(c => c.classList.remove("active"));
+        
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+        
+        // trigger animation reveal again
+        revealOnScroll();
       });
-  });
-</script>
-
+    });
+    
+    // Scroll Reveal
+    function revealOnScroll() {
+      const cards = document.querySelectorAll(".edu-card, .skill-card");
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 50) {
+          card.classList.add("show");
+        }
+      });
+    }
+    
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+    
+    // Form submission
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwCrynEq52_uWYn4d6HAPtGwc5QTBAXnNod2YBV3RSCpfk58YBFM_zD4UiHQYudacP5/exec';
+    const form = document.forms['submit-to-google-sheet'];
+    
+    form?.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          alert("Message sent successfully!");
+          form.reset();
+        })
+        .catch(error => {
+          alert("Error!", error.message);
+        });
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // Close mobile menu if open
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>
