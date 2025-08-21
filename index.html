@@ -44,29 +44,62 @@
       box-shadow: 0 10px 20px rgba(0, 255, 153, 0.3);
     }
     
+    .hire-me-btn {
+      background: linear-gradient(90deg, #ff9900, #ff0066);
+      color: #fff;
+      transition: all 0.3s ease;
+      animation: pulseHire 2s infinite;
+    }
+    
+    @keyframes pulseHire {
+      0% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 153, 0, 0.7); }
+      50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 153, 0, 0.9); }
+      100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 153, 0, 0.7); }
+    }
+    
+    .hire-me-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(255, 153, 0, 0.5);
+    }
+    
     .custom-bg {
       background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
     }
     
-    .profile-wrapper {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      padding: 8px;
-      background: radial-gradient(circle, rgba(0,255,153,0.6) 0%, transparent 70%);
-      animation: pulseGlow 3s infinite ease-in-out;
-    }
-    
-    .profile-wrapper img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 6px solid #121212;
-      box-shadow: 0 0 40px rgba(0, 255, 153, 0.4);
-    }
-    
+.profile-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(0,255,153,0.6) 0%, transparent 70%);
+  animation: pulseGlow 3s infinite ease-in-out;
+  margin: 0 auto; /* ensures center alignment */
+}
+
+.profile-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #121212;
+  box-shadow: 0 0 40px rgba(0, 255, 153, 0.4);
+}
+
+/* Fix spacing/alignment on small screens */
+@media (max-width: 768px) {
+  .profile-wrapper {
+    width: 240px;
+    height: 240px;
+  }
+  .flex-1.text-center {
+    margin-bottom: 2rem;
+  }
+}
+
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -152,75 +185,99 @@
 </head>
 <body class="font-['Poppins'] bg-gray-900 text-white">
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 bg-gray-900 z-50 shadow-lg">
-    <div class="container mx-auto px-6 py-3">
-      <div class="flex items-center justify-between">
-        <a href="#" class="text-2xl font-bold text-white">Adhithyan</a>
-        <button class="md:hidden text-white focus:outline-none" id="menu-toggle">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-        <div class="hidden md:flex space-x-8">
-          <a href="#" class="text-white hover:text-green-400 transition">Home</a>
-          <a href="#services" class="text-white hover:text-green-400 transition">Services</a>
-          <a href="#skills" class="text-white hover:text-green-400 transition">Skills</a>
-          <a href="#projects" class="text-white hover:text-green-400 transition">Projects</a>
-          <a href="#contact" class="text-white hover:text-green-400 transition">Contact</a>
-        </div>
-      </div>
-      <!-- Mobile menu -->
-      <div class="md:hidden hidden mt-4" id="mobile-menu">
-        <div class="flex flex-col space-y-3">
-          <a href="#" class="text-white hover:text-green-400 transition">Home</a>
-          <a href="#services" class="text-white hover:text-green-400 transition">Services</a>
-          <a href="#skills" class="text-white hover:text-green-400 transition">Skills</a>
-          <a href="#projects" class="text-white hover:text-green-400 transition">Projects</a>
-          <a href="#contact" class="text-white hover:text-green-400 transition">Contact</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+<nav class="fixed top-0 left-0 right-0 bg-gray-900 z-50 shadow-lg">
+  <div class="container mx-auto px-6 py-3">
+    <div class="flex items-center justify-between">
+      <a href="#" class="text-2xl font-bold text-white">Devanandan</a>
 
-  <!-- Hero Section -->
-  <section class="min-h-screen flex items-center justify-center px-6 py-20 custom-bg">
-    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-      <!-- Left Side -->
-      <div class="flex-1 text-center md:text-left animate-fadeInLeft">
-        <h5 class="text-lg text-green-400 mb-3 tracking-wider">FLUTTER DEVELOPER</h5>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Hello I'm <span class="gradient-text">Devanandan</span></h1>
-        <p class="text-gray-300 text-lg mb-8 max-w-lg">
-          I build beautiful apps using Flutter. Clean code, smooth UX, and modern design are what I aim for in every project.
-        </p>
-        <div class="flex flex-wrap items-center justify-center md:justify-start gap-6">
-          <a href="assets/Devanandan_pr (2).pdf" download class="bg-green-400 hover:bg-green-500 text-black font-semibold px-8 py-3 rounded-lg transition-all duration-300 shadow-lg shadow-green-400/30 hover:shadow-green-400/50">
-            Download CV <i class="fas fa-download ml-2"></i>
-          </a>
-          <div class="flex space-x-4">
-            <a href="https://www.linkedin.com/in/adhithyan-p-b-856190330/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://github.com/Adhithyan69" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.instagram.com/_adhitxyn_/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Right Side -->
-      <div class="flex-1 flex justify-center animate-fadeInRight">
-        <div class="profile-wrapper">
-          <img src="assets/image.png" alt="Profile" class="w-full h-full">
-        </div>
+      <!-- Hamburger -->
+      <button class="md:hidden text-white focus:outline-none" id="menu-toggle">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="text-white hover:text-green-400 transition">Home</a>
+        <a href="#resume" class="text-white hover:text-green-400 transition">Resume</a>
+        <a href="#services" class="text-white hover:text-green-400 transition">Services</a>
+        <a href="#projects" class="text-white hover:text-green-400 transition">Projects</a>
+        <a href="#contact" class="text-white hover:text-green-400 transition">Contact</a>
       </div>
     </div>
-  </section>
+
+    <!-- Mobile Menu -->
+    <div class="md:hidden hidden mt-4" id="mobile-menu">
+      <div class="flex flex-col space-y-3">
+        <a href="#home" class="text-white hover:text-green-400 transition py-2">Home</a>
+        <a href="#resume" class="text-white hover:text-green-400 transition py-2">Resume</a>
+        <a href="#services" class="text-white hover:text-green-400 transition py-2">Services</a>
+        <a href="#projects" class="text-white hover:text-green-400 transition py-2">Projects</a>
+        <a href="#contact" class="text-white hover:text-green-400 transition py-2">Contact</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section id="home" class="min-h-screen flex items-center justify-center px-6 py-20 custom-bg">
+  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+    
+    <!-- Left Side (Text) -->
+    <div class="flex-1 text-center md:text-left animate-fadeInLeft order-1 md:order-1">
+      <h5 class="text-lg text-green-400 mb-3 tracking-wider">FLUTTER DEVELOPER</h5>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+        Hello I'm <span class="gradient-text">Devanandan</span>
+      </h1>
+      <p class="text-gray-300 text-lg mb-8 max-w-lg mx-auto md:mx-0">
+        I build beautiful apps using Flutter. Clean code, smooth UX, and modern design are what I aim for in every project.
+      </p>
+      
+      <!-- Buttons -->
+      <div class="flex flex-wrap items-center justify-center md:justify-start gap-6 mb-8">
+        <a href="assets/Devanandan_pr (2).pdf" download 
+           class="bg-green-400 hover:bg-green-500 text-black font-semibold px-8 py-3 rounded-lg transition-all duration-300 shadow-lg shadow-green-400/30 hover:shadow-green-400/50">
+          Download CV <i class="fas fa-download ml-2"></i>
+        </a>
+        <a href="#contact" 
+           class="hire-me-btn font-semibold px-8 py-3 rounded-lg border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white transition-all duration-300 flex items-center">
+          Hire Me <i class="fas fa-briefcase ml-2"></i>
+        </a>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="flex justify-center md:justify-start space-x-4">
+        <a href="https://www.linkedin.com/in/devanandan-p-r-549579338?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
+           target="_blank" 
+           class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/devanandanpr859075" 
+           target="_blank" 
+           class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.instagram.com/____mr____dev______?igsh=amFka3F5NzdncTZ1" 
+           target="_blank" 
+           class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Right Side (Profile) -->
+    <div class="flex-1 flex justify-center animate-fadeInRight order-2 md:order-2">
+      <div class="profile-wrapper">
+        <img src="assets/image.png" alt="Profile" class="w-full h-full">
+      </div>
+    </div>
+    
+  </div>
+</section>
 
   <!-- Resume Section -->
-  <section class="py-20 px-6">
+  <section id="resume" class="py-20 px-6">
     <div class="container mx-auto">
       <div class="flex flex-col lg:flex-row gap-12">
         <!-- Left Navigation -->
@@ -433,6 +490,19 @@
         </div>
       </div>
       
+        <!-- E-Commerce App -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="assets/image copy 7.png" alt="E-Commerce App">
+        </div>
+        <div class="project-overlay">
+          <h3 class="text-xl font-bold mb-2">E-Commerce App</h3>
+          <p class="text-gray-300">
+            A modern e-commerce mobile app featuring product browsing, cart management, and secure checkout.
+          </p>
+        </div>
+      </div>
+
       <!-- ChatHub -->
       <div class="project-card">
         <div class="project-image">
@@ -445,71 +515,66 @@
           </p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+<!-- Mini Projects Section -->
+<section class="py-20 px-6 bg-gray-800">
+  <div class="container mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-4">Mini Projects</h2>
+    <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
+      Smaller projects that demonstrate my versatility and continuous learning.
+    </p>
+    
+    <div class="project-grid">
       
-      <!-- E-Commerce App -->
+      <!-- Music App (UI Only) -->
       <div class="project-card">
         <div class="project-image">
-          <img src="assets/image copy 2.png" alt="E-Commerce App">
+          <img src="assets/image copy 4.png" alt="Music App UI">
         </div>
         <div class="project-overlay">
-          <h3 class="text-xl font-bold mb-2">E-Commerce App</h3>
+          <h3 class="text-xl font-bold mb-2">Music App (UI Only)</h3>
           <p class="text-gray-300">
-            A modern e-commerce mobile app featuring product browsing, cart management, and secure checkout.
+            A sleek Flutter-based music app interface showcasing playlists, trending tracks, and a modern design — purely UI focused.
           </p>
         </div>
       </div>
+      
+      <!-- Build List App -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="assets/image copy.png" alt="Build List App">
+        </div>
+        <div class="project-overlay">
+          <h3 class="text-xl font-bold mb-2">Build List App</h3>
+          <p class="text-gray-300">
+            A simple app that lets users create, edit, and manage custom lists with local storage support.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Note App -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="assets/image copy 2.png" alt="Note App">
+        </div>
+        <div class="project-overlay">
+          <h3 class="text-xl font-bold mb-2">Note App</h3>
+          <p class="text-gray-300">
+            A minimal note-taking app to write, save, and organize personal notes with a clean and user-friendly interface.
+          </p>
+        </div>
+      </div>
+      
     </div>
   </div>
 </section>
 
-
-  <!-- Mini Projects Section -->
-  <section class="py-20 px-6 bg-gray-800">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-4">Mini Projects</h2>
-      <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">
-        Smaller projects that demonstrate my versatility and continuous learning.
-      </p>
-      
-      <div class="project-grid">
-        <div class="project-card">
-          <div class="project-image">
-            <img src="assets/image copy 4.png" alt="News App">
-          </div>
-          <div class="project-overlay">
-            <h3 class="text-xl font-bold mb-2">News App</h3>
-            <p class="text-gray-300">
-              A Flutter app that fetches real-time news using the News API and allows users to bookmark articles.
-            </p>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <div class="project-image">
-            <img src="assets/image copy.png" alt="Notes App">
-          </div>
-          <div class="project-overlay">
-            <h3 class="text-xl font-bold mb-2">Notes App</h3>
-            <p class="text-gray-300">
-              Minimal notes application with local storage and responsive layout.
-            </p>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <div class="project-image">
-            <img src="assets/image copy 4.png" alt="Book Search App">
-          </div>
-          <div class="project-overlay">
-            <h3 class="text-xl font-bold mb-2">Book Search App</h3>
-            <p class="text-gray-300">
-              A Flutter application that allows users to search for books using the Google Books API.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Contact Section -->
   <section id="contact" class="py-20 px-6 custom-bg">
@@ -543,7 +608,7 @@
               </div>
               <div>
                 <h4 class="font-bold">Email</h4>
-                <p class="text-gray-400">aadhiadhithyan001@gmail.com</p>
+                <p class="text-gray-400">devanandanpr001@gmail.com</p>
               </div>
             </div>
             
@@ -553,20 +618,20 @@
               </div>
               <div>
                 <h4 class="font-bold">Phone</h4>
-                <p class="text-gray-400">+91 7902262171</p>
+                <p class="text-gray-400">+91 8590758272</p>
               </div>
             </div>
             
             <div class="mt-8">
               <h4 class="text-xl font-bold mb-4">Follow Me</h4>
               <div class="flex space-x-4">
-                <a href="https://www.linkedin.com/in/adhithyan-p-b-856190330/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
+                <a href="https://www.linkedin.com/in/devanandan-p-r-549579338?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
                   <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="https://github.com/Adhithyan69" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
+                <a href="https://github.com/devanandanpr859075" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
                   <i class="fab fa-github"></i>
                 </a>
-                <a href="https://www.instagram.com/_adhitxyn_/" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
+                <a href="https://www.instagram.com/____mr____dev______?igsh=amFka3F5NzdncTZ1" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
                   <i class="fab fa-instagram"></i>
                 </a>
               </div>
@@ -598,11 +663,10 @@
       </div>
     </div>
   </section>
-
   <!-- Footer -->
   <footer class="bg-gray-900 py-8 text-center">
     <div class="container mx-auto px-6">
-      <p class="text-gray-400">&copy; 2025 Adhithyan. All rights reserved.</p>
+      <p class="text-gray-400">&copy; 2025 Devanandan. All rights reserved.</p>
     </div>
   </footer>
 
