@@ -224,8 +224,15 @@
 <section id="home" class="min-h-screen flex items-center justify-center px-6 py-20 custom-bg">
   <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
     
-    <!-- Left Side (Text) -->
-    <div class="flex-1 text-center md:text-left animate-fadeInLeft order-1 md:order-1">
+    <!-- Right Side (Profile Image - show TOP on mobile) -->
+    <div class="flex-1 flex justify-center animate-fadeInRight order-1 md:order-2">
+      <div class="profile-wrapper">
+        <img src="assets/image.png" alt="Profile" class="w-full h-full">
+      </div>
+    </div>
+
+    <!-- Left Side (Text Content) -->
+    <div class="flex-1 text-center md:text-left animate-fadeInLeft order-2 md:order-1">
       <h5 class="text-lg text-green-400 mb-3 tracking-wider">FLUTTER DEVELOPER</h5>
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
         Hello I'm <span class="gradient-text">Devanandan</span>
@@ -263,13 +270,6 @@
            class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
           <i class="fab fa-instagram"></i>
         </a>
-      </div>
-    </div>
-    
-    <!-- Right Side (Profile) -->
-    <div class="flex-1 flex justify-center animate-fadeInRight order-2 md:order-2">
-      <div class="profile-wrapper">
-        <img src="assets/image.png" alt="Profile" class="w-full h-full">
       </div>
     </div>
     
