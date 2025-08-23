@@ -65,40 +65,115 @@
     .custom-bg {
       background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
     }
-    
 .profile-wrapper {
   position: relative;
   width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  padding: 8px;
+  height: 340px;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, rgba(0,255,153,0.6) 0%, transparent 70%);
-  animation: pulseGlow 3s infinite ease-in-out;
-  margin: 0 auto; /* ensures center alignment */
+  align-items: center;
+  overflow: visible; /* allow head overflow */
 }
 
+/* Neon glowing hexagon border */
+.profile-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  border: 3px solid #00e1ff;
+  box-shadow: 0 0 15px #00e1ff, 
+              0 0 30px #00e1ff, 
+              0 0 45px #00e1ff;
+  animation: neonPulse 2s infinite alternate;
+  z-index: 1;
+}
+
+/* Hexagon background mask */
+.hex-mask {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  background: linear-gradient(180deg, #032dc6 0%, #000814 100%);
+  z-index: 2;
+}
+
+/* Profile image (head out, body clipped) */
+.profile-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  position: relative;
+  z-index: 4;
+  transform: translateY(-25px) scale(1.1); /* head out, body fits */
+  clip-path: polygon(50% 15%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%); 
+}
+
+/* Glow animation */
+@keyframes neonPulse {
+  from {
+    box-shadow: 0 0 15px #00e1ff, 
+                0 0 30px #00e1ff, 
+                0 0 45px #00e1ff;
+  }
+  to {
+    box-shadow: 0 0 25px #00e1ff, 
+                0 0 50px #00e1ff, 
+                0 0 75px #00e1ff;
+  }
+}
+
+/* Fog Animation */
+.fog {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100px;
+  background: url("https://i.ibb.co/fX7YQzq/fog-texture.png") repeat-x;
+  background-size: contain;
+  animation: fogMove 15s linear infinite;
+  opacity: 0.4;
+  filter: blur(12px);
+  z-index: 3; /* above hex background but below image */
+  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+@keyframes fogMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* 
+/* Profile image */
 .profile-wrapper img {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   object-fit: cover;
-  border: 6px solid #121212;
-  box-shadow: 0 0 40px rgba(0, 255, 153, 0.4);
+  position: relative;
+  z-index: 3;
+  transform: translateY(-15px); /* push head out */
 }
 
-/* Fix spacing/alignment on small screens */
+/* Glow animation */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 20px rgba(0, 200, 255, 0.3); }
+  50% { box-shadow: 0 0 70px rgba(0, 200, 255, 1); }
+  100% { box-shadow: 0 0 20px rgba(0, 200, 255, 0.3); }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .profile-wrapper {
     width: 240px;
-    height: 240px;
+    height: 270px;
   }
-  .flex-1.text-center {
-    margin-bottom: 2rem;
+  .profile-wrapper img {
+    transform: translateY(-18px);
   }
-}
+} */
 
     .project-grid {
       display: grid;
@@ -109,7 +184,7 @@
     
     .project-card {
       position: relative;
-      border-radius: 12px;
+      border-radius: 2px;
       overflow: hidden;
       height: 300px;
       transition: transform 0.3s ease;
@@ -225,11 +300,12 @@
   <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
     
     <!-- Right Side (Profile Image - show TOP on mobile) -->
-    <div class="flex-1 flex justify-center animate-fadeInRight order-1 md:order-2">
-      <div class="profile-wrapper">
-        <img src="assets/image.png" alt="Profile" class="w-full h-full">
-      </div>
-    </div>
+   <div class="flex-1 flex justify-center animate-fadeInRight order-1 md:order-2">
+  <div class="profile-wrapper">
+    <div class="hex-mask"></div>
+    <img src="assets/Untitled design-Photoroom.png" alt="Profile">
+  </div>
+</div>
 
     <!-- Left Side (Text Content) -->
     <div class="flex-1 text-center md:text-left animate-fadeInLeft order-2 md:order-1">
