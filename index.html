@@ -175,51 +175,103 @@
   }
 } */
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    
-    .project-card {
-      position: relative;
-      border-radius: 2px;
-      overflow: hidden;
-      height: 300px;
-      transition: transform 0.3s ease;
-    }
-    
-    .project-card:hover {
-      transform: translateY(-10px);
-    }
-    
-    .project-image {
-      width: 100%;
-      height: 100%;
-    }
-    
-    .project-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    .project-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-      color: white;
-      padding: 20px;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    
-    .project-card:hover .project-overlay {
-      transform: translateY(0);
-    }
+
+.projects {
+  padding: clamp(2rem, 5vw, 4rem);
+  background: #111;
+  text-align: center;
+}
+
+.projects h2 {
+  color: #fff;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: 3rem;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  background: rgba(173, 32, 32, 0.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 35px rgba(36, 1, 77, 0.6);
+}
+
+.project-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  flex-shrink: 0;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+  transition: transform 0.5s ease;
+}
+
+.project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+background: linear-gradient( to top, rgba(10, 25, 47, 0.95), /* near-black navy */ rgba(117, 129, 218, 0.7) /* soft indigo */ );  color: #fff;
+  padding: 1.2rem 1.5rem;
+  transform: translateY(50%);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.project-card:hover .project-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.project-overlay h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+  color: #fdfbff;
+}
+
+.project-overlay p {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+  color: #e6daf5;
+}
+
+.bg-dark {
+  background-color: #000000 !important;
+}
     
     .tab-content {
       display: none;
@@ -331,7 +383,7 @@
 
       <!-- Social Icons -->
       <div class="flex justify-center md:justify-start space-x-4">
-        <a href="https://www.linkedin.com/in/devanandan-p-r-549579338?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" 
+        <a href="https://www.linkedin.com/in/devanandan-p-r-549579338" 
            target="_blank" 
            class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all duration-300 shadow-lg">
           <i class="fab fa-linkedin-in"></i>
@@ -582,12 +634,12 @@
       <!-- ChatHub -->
       <div class="project-card">
         <div class="project-image">
-          <img src="assets/image copy 5.png" alt="ChatHub: Messaging App">
+          <img src="assets/image copy 10.png" alt="ChatHub: Messaging App">
         </div>
         <div class="project-overlay">
-          <h3 class="text-xl font-bold mb-2">ChatHub</h3>
+          <h3 class="text-xl font-bold mb-2">Attendance App UI</h3>
           <p class="text-gray-300">
-            A real-time messaging app with smooth UI and secure chat features for seamless communication.
+           Clean Flutter-based mobile UI designs for learning apps.
           </p>
         </div>
       </div>
@@ -605,14 +657,14 @@
     <div class="project-grid">
       
       <!-- Music App (UI Only) -->
-      <div class="project-card">
+     <div class="project-card">
         <div class="project-image">
-          <img src="assets/image copy 4.png" alt="Music App UI">
+          <img src="assets/image copy 5.png" alt="ChatHub: Messaging App">
         </div>
         <div class="project-overlay">
-          <h3 class="text-xl font-bold mb-2">Music App (UI Only)</h3>
+          <h3 class="text-xl font-bold mb-2">ChatHub</h3>
           <p class="text-gray-300">
-            A sleek Flutter-based music app interface showcasing playlists, trending tracks, and a modern design — purely UI focused.
+            A real-time messaging app with smooth UI and secure chat features for seamless communication.
           </p>
         </div>
       </div>
@@ -698,20 +750,21 @@
               </div>
             </div>
             
-            <div class="mt-8">
-              <h4 class="text-xl font-bold mb-4">Follow Me</h4>
-              <div class="flex space-x-4">
-                <a href="https://www.linkedin.com/in/devanandan-p-r-549579338?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://github.com/devanandanpr859075" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
-                  <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.instagram.com/____mr____dev______?igsh=amFka3F5NzdncTZ1" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
-                  <i class="fab fa-instagram"></i>
-                </a>
-              </div>
-            </div>
+       <div class="mt-8">
+  <h4 class="text-xl font-bold mb-4">Follow Me</h4>
+  <div class="flex space-x-4">
+    <a href="https://www.linkedin.com/in/devanandan-p-r-549579338" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+    <a href="https://github.com/devanandanpr859075" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="https://www.instagram.com/____mr____dev______?igsh=amFka3F5NzdncTZ1" target="_blank" class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-400 hover:text-black transition-all">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </div>
+</div>
+
           </div>
         </div>
         
